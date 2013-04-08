@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 public class StiefoPanel extends JPanel implements KeyListener{
 
 	private String message=null;
-	private static int height=50;
+	private static int height=20;
 	
 	private void write(Graphics g, String m, Point p,int base) {
 		System.out.println("write("+m+")");
@@ -26,6 +26,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		case 'e': writeE(g,m,p,base); break;
 		case 'g': writeG(g,m,p,base); break;
 		case 'k': writeK(g,m,p,base); break;
+		case 'm': writeM(g,m,p,base); break;
 		case 'n': writeN(g,m,p,base); break;
 		case 'o': writeO(g,m,p,base); break;
 		case 'r': writeR(g,m,p,base); break;
@@ -37,7 +38,40 @@ public class StiefoPanel extends JPanel implements KeyListener{
 								
 		}
 	}
+	
+	private void writeSpace(Graphics g, String m, Point p,int base) {
+		int y=base;
+		if (m.length()>0) {
+			switch (m.charAt(0)){
+			case 'c':
+			case 'b':
+			case 'k':
+			case 'm':
+			case 'o':
+			case 'z': y-=height; break;
+			case 'e':
+			case 'n':
+			case 't': y-=height/2; break;
+			}
+		}		
+		write(g,m,new Point(p.x+height/2,y),base);		
+	}
 
+
+	public void paint(Graphics g) {
+		super.paint(g);
+		if (message==null || message.length()<1) return;
+		System.out.println(message);
+		int base=400;
+		Point start=new Point(10,base);
+		g.setColor(Color.lightGray);
+		g.drawLine(start.x-20, base, start.x+800, base);
+		g.drawLine(start.x-20, base-height/2, start.x+800, base-height/2);
+		g.drawLine(start.x-20, base-height, start.x+800, base-height);
+		g.setColor(Color.black);
+		write(g,message,start,base);
+	}
+	
 	private void writeZ(Graphics g, String m, Point p, int base) {
 		g.drawLine(p.x, p.y,p.x-9*height/40, p.y+height/2);
 		g.drawLine(p.x-9*height/40, p.y+height/2, p.x-12*height/40, p.y+height);
@@ -60,37 +94,17 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 	public void setMessage(String m){
-		message=m.toLowerCase();
+		message=" "+m.toLowerCase();
 		repaint();
 	}
 
 
-	public void paint(Graphics g) {
-		super.paint(g);
-		if (message==null || message.length()<1) return;
-		System.out.println(message);
-		int base=400;
-		Point start=new Point(20,base);
-		g.setColor(Color.lightGray);
-		g.drawLine(start.x-20, base, start.x+800, base);
-		g.drawLine(start.x-20, base-height/2, start.x+800, base-height/2);
-		g.drawLine(start.x-20, base-height, start.x+800, base-height);
-		g.setColor(Color.black);
-		switch (message.charAt(0)){
-		case 'c':
-		case 'b':
-		case 'k':
-		case 'z': start=new Point(20,base-height); break;
-		case 'n':
-		case 'e': start=new Point(20,base-height/2); break;
-		}
-		
-		write(g,message,start,base);
-	}
-	
 	private void writeT(Graphics g, String m, Point p, int base) {
 		if (m.length()>0){
 			switch (m.charAt(0)){
+			case 't':
+				writeT(g,m.substring(1),p,base);
+				return;
 			case 'z':
 				writeZ(g,m.substring(1),p,base);
 				return;
@@ -110,18 +124,6 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 
-	private void writeSpace(Graphics g, String m, Point p,int base) {
-		int y=base;
-		if (m.length()>0) {
-			switch (message.charAt(0)){
-			case 'b':
-			case 'k': y-=height; break;
-			case 'n':
-			case 'e': y-=height/2; break;
-			}
-		}		
-		write(g,m,new Point(p.x+height/2,y),base);		
-	}
 
 
 	private void writeN(Graphics g, String m, Point p,int base) {
@@ -131,7 +133,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			case 'k':
 				g.drawArc(p.x-height/40, p.y-2*height/40, height/4, height/4, 20, 115);
 				g.drawLine(p.x+9*height/40, p.y+2*height/40, p.x+11*height/40, p.y+height);
-				Point n=new Point(p.x+20*height/40,p.y+height);
+				Point n=new Point(p.x+10*height/40,p.y+height);
 				write(g,m.substring(1),n,base);
 				return;
 			case 'n':
@@ -151,6 +153,11 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		
 	}
 
+	private void writeM(Graphics g, String m, Point p,int base) {
+		g.drawArc(p.x-3*height/40, p.y-height/40, height/5, 41*height/40, 275, 195);
+		write(g,m,new Point(p.x+height/20,p.y+height),base);
+		
+	}
 
 	private void writeG(Graphics g, String m, Point p,int base) {
 		Point n=new Point(p.x+height/2,p.y+height/2);
