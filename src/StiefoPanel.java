@@ -36,6 +36,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 	
 	private void write(Graphics g, String m, Point p,int base) {
+		System.out.println("write("+m+")");
 		if (m.length()<1) return;
 		char c=m.charAt(0);
 		m=m.substring(1);
@@ -67,11 +68,14 @@ public class StiefoPanel extends JPanel implements KeyListener{
 
 	private void writeN(Graphics g, String m, Point p,int base) {
 		if (m.length()>0){
-			if ((m.charAt(0)=='g'||m.charAt(0)=='k')){
+			switch (m.charAt(0)){
+			case 'g':
+			case 'k':
 				g.drawArc(p.x-height/40, p.y-2*height/40, height/4, height/4, 20, 115);
 				g.drawLine(p.x+9*height/40, p.y+2*height/40, p.x+11*height/40, p.y+height);
 				Point n=new Point(p.x+20*height/40,p.y+height);
-				write(g,m.substring(1),n,base);
+			case 'n':
+				writeN(g,m.substring(1),p,base);
 				return;
 			}
 		}
