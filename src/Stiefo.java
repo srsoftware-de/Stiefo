@@ -21,10 +21,10 @@ public class Stiefo extends JFrame {
 
 	private Component components() {
 		VerticalPanel mainPanel = new VerticalPanel();
-		JTextField input = new JTextField(100);
+		JTextField input = new JTextField(70);
 		StiefoPanel drawArea = new StiefoPanel();
 		input.addKeyListener(drawArea);
-		drawArea.setPreferredSize(new Dimension(1000, 600));
+		drawArea.setPreferredSize(new Dimension(800, 600));
 		drawArea.setSize(getPreferredSize());
 		drawArea.setBackground(Color.white);
 		mainPanel.add(input);
