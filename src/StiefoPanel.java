@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -10,7 +11,7 @@ import javax.swing.JTextField;
 public class StiefoPanel extends JPanel implements KeyListener{
 
 	private String message=null;
-	private static int height=150;
+	private static int height=50;
 	
 	public void setMessage(String m){
 		message=m.toLowerCase();
@@ -24,9 +25,11 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		System.out.println(message);
 		int base=400;
 		Point start=new Point(20,base);
+		g.setColor(Color.lightGray);
 		g.drawLine(start.x-20, start.y, start.x+800, start.y);
 		g.drawLine(start.x-20, start.y+height/2, start.x+800, start.y+height/2);
 		g.drawLine(start.x-20, start.y+height, start.x+800, start.y+height);
+		g.setColor(Color.black);
 		switch (message.charAt(0)){
 		case 'a': start=new Point(20,base+height); break;
 		case 'e': start=new Point(20,base+height/2); break;
@@ -49,20 +52,30 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		case 'g': writeG(g,m,p,base); break;
 		case 'k': writeK(g,m,p,base); break;
 		case 'n': writeN(g,m,p,base); break;
+		case 'o': writeO(g,m,p,base); break;
 		case 'u': writeU(g,m,p,base); break;
 		default: write(g,m,p,base);
 						 break;
 								
 		}
 	}
+	private void writeO(Graphics g, String m, Point p, int base) {
+		Point n = new Point(p.x+2*height/3,p.y);
+		g.drawLine(p.x, p.y, n.x, n.y);
+		write(g,m,n,base);
+	}
+
+
 	private void writeSpace(Graphics g, String m, Point p,int base) {
 		int y=base;
 		if (m.length()>0) {
 			switch (m.charAt(0)){
-			case ' ': y+=height; break;  
+			case 'a': y+=height; break;
+			case 'e':
+			case 'n': y+=height/2; break;
 			}
 		}		
-		write(g,m,new Point(p.x+height/4,y),base);		
+		write(g,m,new Point(p.x+height/2,y),base);		
 	}
 
 
@@ -74,6 +87,8 @@ public class StiefoPanel extends JPanel implements KeyListener{
 				g.drawArc(p.x-height/40, p.y-2*height/40, height/4, height/4, 20, 115);
 				g.drawLine(p.x+9*height/40, p.y+2*height/40, p.x+11*height/40, p.y+height);
 				Point n=new Point(p.x+20*height/40,p.y+height);
+				write(g,m.substring(1),n,base);
+				return;
 			case 'n':
 				writeN(g,m.substring(1),p,base);
 				return;
