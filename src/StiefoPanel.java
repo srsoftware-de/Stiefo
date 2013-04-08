@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 public class StiefoPanel extends JPanel implements KeyListener{
 
 	private String message=null;
-	private static int height=20;
+	private static int height=200;
 	
 	private void write(Graphics g, String m, Point p,int base) {
 		System.out.println("write("+m+")");
@@ -49,8 +49,8 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			case 'm':
 			case 'o':
 			case 'z': y-=height; break;
-			case 'e':
 			case 'n':
+			case 'e':
 			case 't': y-=height/2; break;
 			}
 		}		
@@ -129,6 +129,12 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	private void writeN(Graphics g, String m, Point p,int base) {
 		if (m.length()>0){
 			switch (m.charAt(0)){
+			case 'd':
+			case 't':
+				g.drawArc(p.x-3*height/40, p.y-height/40, height/5, 41*height/40, 310, 160);
+				g.drawLine(p.x+4*height/43,p.y+35*height/40,p.x+3*height/43,p.y+height);
+				write(g,m.substring(1),new Point(p.x+3*height/43,p.y+height),base);
+				return;
 			case 'g':
 			case 'k':
 				g.drawArc(p.x-height/40, p.y-2*height/40, height/4, height/4, 20, 115);
@@ -154,8 +160,8 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 	private void writeM(Graphics g, String m, Point p,int base) {
-		g.drawArc(p.x-3*height/40, p.y-height/40, height/5, 41*height/40, 275, 195);
-		write(g,m,new Point(p.x+height/20,p.y+height),base);
+		g.drawArc(p.x-4*height/43, p.y-height/40, height/4, 43*height/40, 244, 225);
+		write(g,m,new Point(p.x-height/40,p.y+height),base);
 		
 	}
 
@@ -192,7 +198,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			g.drawLine(p.x+9*height/40, p.y+2*height/40, p.x+11*height/40, p.y+38*height/40);
 			g.drawArc(p.x+11*height/40, p.y+32*height/40, height/4, height/4, 200, 115);
 			Point n=new Point(p.x+20*height/40,p.y+height);
-			write(g,m,n,base);			
+			write(g,m.substring(1),n,base);			
 		} else {
 			g.drawArc(p.x-9*height/40, p.y-6*height/30, height/4, height/4, 315, 230);
 			g.drawLine(p.x-9*height/40, p.y-3*height/40, p.x-9*height/40, p.y+35*height/40);
