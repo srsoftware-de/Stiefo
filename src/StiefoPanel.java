@@ -67,7 +67,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		super.paint(g);
 		if (message==null || message.length()<1) return;
 		System.out.println(message);
-		int base=100+2*height;
+		int base=100+height;
 		Point start=new Point(10,base);
 		g.setColor(Color.lightGray);
 		g.drawLine(start.x-20, base, start.x+800, base);
@@ -317,6 +317,9 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			case 'e':
 				writeE(g,m.substring(1),p,base);
 				return;
+			case 'i':
+				writeEI(g,m.substring(1),p,base);
+				return;
 			case 'h':
 				if (m.length()>1){
 					switch (m.charAt(1)){
@@ -337,6 +340,12 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		g.drawLine(p.x, p.y, newPos.x, newPos.y);
 		write(g,m,newPos,base);
 	}
+	private void writeEI(Graphics g, String m, Point p, int base) {		
+		Point n=new Point(p.x+17*height/10,p.y-height);
+		g.drawLine(p.x, p.y, n.x, n.y);
+		write(g,m,n,base);
+}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 	}
