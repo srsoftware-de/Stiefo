@@ -28,12 +28,24 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		case 'k': writeK(g,m,p,base); break;
 		case 'n': writeN(g,m,p,base); break;
 		case 'o': writeO(g,m,p,base); break;
+		case 'r': writeR(g,m,p,base); break;
 		case 't': writeT(g,m,p,base); break;
 		case 'u': writeU(g,m,p,base); break;
 		default: write(g,m,p,base);
 						 break;
 								
 		}
+	}
+
+	private void writeR(Graphics g, String m, Point p, int base) {
+		Point newPos = new Point(p.x+height/4, p.y-height/2);
+		g.drawLine(p.x, p.y, newPos.x, newPos.y);
+		p=newPos;
+		g.drawArc(p.x-height/80, p.y-height/40, height/8, height/8, 20, 115);
+		g.drawLine(p.x+9*height/80, p.y+height/40, p.x+11*height/80, p.y+19*height/40);
+		g.drawArc(p.x+11*height/80, p.y+16*height/40, height/8, height/8, 200, 115);
+		Point n=new Point(p.x+10*height/40,p.y+height/2);
+		write(g,m,n,base);			
 	}
 
 	public void setMessage(String m){
