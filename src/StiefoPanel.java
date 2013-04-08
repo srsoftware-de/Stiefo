@@ -314,6 +314,9 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			case 'a':
 				writeA(g,m.substring(1),p,base);
 				return;
+			case 'u':
+				writeAU(g,m.substring(1),p,base);
+				return;
 			case 'i':
 			case 'y':
 				writeEI(g,m.substring(1),p,base);
@@ -339,6 +342,14 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		write(g,m,newPos,base);
 	}
 	
+	private void writeAU(Graphics g, String m, Point p, int base) {
+		Point n=new Point(p.x+17*height/10,p.y-height/2);
+		g.drawLine(p.x, p.y, n.x, n.y);
+		g.drawOval(p.x+8*height/10, p.y+height/10, 5, 5);
+		write(g,m,n,base);
+	
+	}
+
 	private void writeE(Graphics g, String m, Point p,int base) {
 		if (m.length()>0){
 			switch (m.charAt(0)){
