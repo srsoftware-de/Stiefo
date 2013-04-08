@@ -13,6 +13,29 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	private String message=null;
 	private static int height=50;
 	
+	private void write(Graphics g, String m, Point p,int base) {
+		System.out.println("write("+m+")");
+		if (m.length()<1) return;
+		char c=m.charAt(0);
+		m=m.substring(1);
+		switch (c){
+		case ' ': writeSpace(g,m,p,base); break;
+		case 'a': writeA(g,m,p,base); break;
+		case 'b': writeB(g,m,p,base); break;
+		case 'c': writeC(g,m,p,base); break;
+		case 'e': writeE(g,m,p,base); break;
+		case 'g': writeG(g,m,p,base); break;
+		case 'k': writeK(g,m,p,base); break;
+		case 'n': writeN(g,m,p,base); break;
+		case 'o': writeO(g,m,p,base); break;
+		case 't': writeT(g,m,p,base); break;
+		case 'u': writeU(g,m,p,base); break;
+		default: write(g,m,p,base);
+						 break;
+								
+		}
+	}
+
 	public void setMessage(String m){
 		message=m.toLowerCase();
 		repaint();
@@ -38,29 +61,15 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		write(g,message,start,base);
 	}
 	
-	private void write(Graphics g, String m, Point p,int base) {
-		System.out.println("write("+m+")");
-		if (m.length()<1) return;
-		char c=m.charAt(0);
-		m=m.substring(1);
-		switch (c){
-		case ' ': writeSpace(g,m,p,base); break;
-		case 'a': writeA(g,m,p,base); break;
-		case 'b': writeB(g,m,p,base); break;
-		case 'c': writeC(g,m,p,base); break;
-		case 'e': writeE(g,m,p,base); break;
-		case 'g': writeG(g,m,p,base); break;
-		case 'k': writeK(g,m,p,base); break;
-		case 'n': writeN(g,m,p,base); break;
-		case 'o': writeO(g,m,p,base); break;
-		case 'u': writeU(g,m,p,base); break;
-		default: write(g,m,p,base);
-						 break;
-								
-		}
+	private void writeT(Graphics g, String m, Point p, int base) {
+		Point n = new Point(p.x-height/20, p.y+height/2);
+		g.drawLine(p.x, p.y, n.x, n.y);
+		write(g,m,n,base);
 	}
+
+
 	private void writeO(Graphics g, String m, Point p, int base) {
-		Point n = new Point(p.x+2*height/3,p.y);
+		Point n = new Point(p.x+height,p.y);
 		g.drawLine(p.x, p.y, n.x, n.y);
 		write(g,m,n,base);
 	}
@@ -109,7 +118,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 
 
 	private void writeU(Graphics g, String m, Point p,int base) {
-		Point n=new Point(p.x+17*height/10,p.y-height);
+		Point n=new Point(p.x+17*height/10,p.y-height/2);
 		g.drawLine(p.x, p.y, n.x, n.y);
 		write(g,m,n,base);
 	}
@@ -153,7 +162,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 
 
 	private void writeB(Graphics g, String m, Point p,int base) {
-		Point n = new Point(p.x, p.y+height);
+		Point n = new Point(p.x-height/10, p.y+height);
 		g.drawLine(p.x, p.y, n.x, n.y);
 		write(g,m,n,base);
 	}
