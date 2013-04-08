@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 public class StiefoPanel extends JPanel implements KeyListener{
 
 	private String message=null;
-	private static int height=20;
+	private static int height=200;
 	
 	private void write(Graphics g, String m, Point p,int base) {
 		System.out.println("write("+m+")");
@@ -25,6 +25,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		case 'c': writeC(g,m,p,base); break;
 		case 'e': writeE(g,m,p,base); break;
 		case 'g': writeG(g,m,p,base); break;
+		case 'h': writeH(g,m,p,base); break;
 		case 'i': writeI(g,m,p,base); break;
 		case 'k': writeK(g,m,p,base); break;
 		case 'm': writeM(g,m,p,base); break;
@@ -46,9 +47,12 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			switch (m.charAt(0)){
 			case 'c':
 			case 'b':
+			case 'h':
+			case 'i':
 			case 'k':
 			case 'm':
 			case 'o':
+			case 'r':
 			case 'z': y-=height; break;
 			case 'n':
 			case 'e':
@@ -76,6 +80,13 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	private void writeZ(Graphics g, String m, Point p, int base) {
 		g.drawLine(p.x, p.y,p.x-9*height/40, p.y+height/2);
 		g.drawLine(p.x-9*height/40, p.y+height/2, p.x-12*height/40, p.y+height);
+		Point n = new Point(p.x-12*height/40, p.y+height);		
+		write(g,m,n,base);
+	}
+
+	private void writeH(Graphics g, String m, Point p, int base) {
+		g.drawLine(p.x, p.y,p.x-3*height/40, p.y+height/2);
+		g.drawLine(p.x-3*height/40, p.y+height/2, p.x-12*height/40, p.y+height);
 		Point n = new Point(p.x-12*height/40, p.y+height);		
 		write(g,m,n,base);
 	}
@@ -125,6 +136,28 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 	private void writeI(Graphics g, String m, Point p, int base) {
+		if (m.length()>0){
+			switch (m.charAt(0)){
+			case 'e':
+			case 'i':
+					writeI(g,m.substring(1),p,base);
+				return;
+			case 'h':
+				if (m.length()>1){
+					switch (m.charAt(1)){
+					case 'a':
+					case 'e':
+					case 'i':
+					case 'o':
+					case 'u':
+						break;
+					default: m=m.substring(1);
+						break;
+					}
+				} else m=m.substring(1);
+			}
+		}
+
 		Point n = new Point(p.x+height/2,p.y);
 		g.drawLine(p.x, p.y, n.x, n.y);
 		write(g,m,n,base);
@@ -179,6 +212,27 @@ public class StiefoPanel extends JPanel implements KeyListener{
 
 
 	private void writeU(Graphics g, String m, Point p,int base) {
+		if (m.length()>0){
+			switch (m.charAt(0)){
+			case 'u':
+				writeU(g,m.substring(1),p,base);
+				return;
+			case 'h':
+				if (m.length()>1){
+					switch (m.charAt(1)){
+					case 'a':
+					case 'e':
+					case 'i':
+					case 'o':
+					case 'u':
+						break;
+					default: m=m.substring(1);
+						break;
+					}
+				} else m=m.substring(1);
+			}
+		}
+
 		Point n=new Point(p.x+17*height/10,p.y-height/2);
 		g.drawLine(p.x, p.y, n.x, n.y);
 		write(g,m,n,base);
@@ -231,6 +285,27 @@ public class StiefoPanel extends JPanel implements KeyListener{
 
 
 	private void writeA(Graphics g, String m, Point p,int base) {
+		if (m.length()>0){
+			switch (m.charAt(0)){
+			case 'a':
+				writeA(g,m.substring(1),p,base);
+				return;
+			case 'h':
+				if (m.length()>1){
+					switch (m.charAt(1)){
+					case 'a':
+					case 'e':
+					case 'i':
+					case 'o':
+					case 'u':
+						break;
+					default: m=m.substring(1);
+						break;
+					}
+				} else m=m.substring(1);
+			}
+		}
+
 		Point newPos = new Point(p.x+height, p.y-height);
 		g.drawLine(p.x, p.y, newPos.x, newPos.y);
 		write(g,m,newPos,base);
@@ -242,9 +317,22 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			case 'e':
 				writeE(g,m.substring(1),p,base);
 				return;
+			case 'h':
+				if (m.length()>1){
+					switch (m.charAt(1)){
+					case 'a':
+					case 'e':
+					case 'i':
+					case 'o':
+					case 'u':
+						break;
+					default: m=m.substring(1);
+						break;
+					}
+				} else m=m.substring(1);
 			}
 		}
-
+		
 		Point newPos = new Point(p.x+height/2, p.y-height/2);
 		g.drawLine(p.x, p.y, newPos.x, newPos.y);
 		write(g,m,newPos,base);
