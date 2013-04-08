@@ -38,13 +38,12 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 	private void writeR(Graphics g, String m, Point p, int base) {
-		System.out.println(p.y);
-		System.out.println(base);
-		if (p.y==base){
+/*	this seems odd	
+ * if (p.y==base){
 			Point newPos = new Point(p.x+height/4, p.y-height/2);
 			g.drawLine(p.x, p.y, newPos.x, newPos.y);
 			p=newPos;
-		}
+		}*/
 		g.drawArc(p.x-height/80, p.y-height/40, height/8, height/8, 20, 115);
 		g.drawLine(p.x+9*height/80, p.y+height/40, p.x+11*height/80, p.y+19*height/40);
 		g.drawArc(p.x+11*height/80, p.y+16*height/40, height/8, height/8, 200, 115);
@@ -70,6 +69,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		g.drawLine(start.x-20, base-height, start.x+800, base-height);
 		g.setColor(Color.black);
 		switch (message.charAt(0)){
+		case 'c':
 		case 'b':
 		case 'k': start=new Point(20,base-height); break;
 		case 'n':
@@ -122,6 +122,13 @@ public class StiefoPanel extends JPanel implements KeyListener{
 				return;
 			}
 		}
+		/* this seems odd
+		 * if (p.y==base){
+			Point newPos = new Point(p.x+height/4, p.y-height/2);
+			g.drawLine(p.x, p.y, newPos.x, newPos.y);
+			p=newPos;
+		} */
+
 		g.drawArc(p.x-4*height/40, p.y, height/4, 23*height/40, 310, 155);
 		write(g,m,new Point(p.x+2*height/20,p.y+height/2),base);
 		
@@ -144,13 +151,14 @@ public class StiefoPanel extends JPanel implements KeyListener{
 
 
 	private void writeC(Graphics g, String m, Point p,int base) {
-		if (m.length()<2) return;
-		char c=m.charAt(0);		
-		switch (c){
-		case 'h': writeCH(g,m.substring(1),p,base); break;
-		case 'k': writeK(g,m.substring(1),p,base); break;
-		default: write(g,m.substring(1),p,base);
-		}
+		if (m.length()>0){
+			char c=m.charAt(0);		
+			switch (c){
+				case 'h': writeCH(g,m.substring(1),p,base); return;
+				case 'k': writeK(g,m.substring(1),p,base); return;
+			}
+		}	
+		write(g,m,p,base);		
 	}
 
 
@@ -194,6 +202,14 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 	
 	private void writeE(Graphics g, String m, Point p,int base) {
+		if (m.length()>0){
+			switch (m.charAt(0)){
+			case 'e':
+				writeE(g,m.substring(1),p,base);
+				return;
+			}
+		}
+
 		Point newPos = new Point(p.x+height/2, p.y-height/2);
 		g.drawLine(p.x, p.y, newPos.x, newPos.y);
 		write(g,m,newPos,base);
