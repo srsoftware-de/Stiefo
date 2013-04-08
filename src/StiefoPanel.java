@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 public class StiefoPanel extends JPanel implements KeyListener{
 
 	private String message=null;
-	private static int height=200;
+	private static int height=100;
 	
 	private void write(Graphics g, String m, Point p,int base) {
 		System.out.println("write("+m+")");
@@ -67,7 +67,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		super.paint(g);
 		if (message==null || message.length()<1) return;
 		System.out.println(message);
-		int base=100+height;
+		int base=200+height;
 		Point start=new Point(10,base);
 		g.setColor(Color.lightGray);
 		g.drawLine(start.x-20, base, start.x+800, base);
@@ -130,6 +130,30 @@ public class StiefoPanel extends JPanel implements KeyListener{
 
 
 	private void writeO(Graphics g, String m, Point p, int base) {
+		if (m.length()>0){
+			switch (m.charAt(0)){
+			case 'o':
+				writeO(g,m.substring(1),p,base);
+			return;
+			case 'i':
+			case 'y':
+				writeEU(g,m.substring(1),p,base);
+			return;
+			case 'h':
+				if (m.length()>1){
+					switch (m.charAt(1)){
+					case 'a':
+					case 'e':
+					case 'i':
+					case 'o':
+					case 'u':
+						break;
+					default: m=m.substring(1);
+						break;
+					}
+				} else m=m.substring(1);
+			}
+		}
 		Point n = new Point(p.x+height,p.y);
 		g.drawLine(p.x, p.y, n.x, n.y);
 		write(g,m,n,base);
@@ -290,6 +314,10 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			case 'a':
 				writeA(g,m.substring(1),p,base);
 				return;
+			case 'i':
+			case 'y':
+				writeEI(g,m.substring(1),p,base);
+				return;
 			case 'h':
 				if (m.length()>1){
 					switch (m.charAt(1)){
@@ -318,7 +346,11 @@ public class StiefoPanel extends JPanel implements KeyListener{
 				writeE(g,m.substring(1),p,base);
 				return;
 			case 'i':
+			case 'y':
 				writeEI(g,m.substring(1),p,base);
+				return;
+			case 'u':
+				writeEU(g,m.substring(1),p,base);
 				return;
 			case 'h':
 				if (m.length()>1){
@@ -340,6 +372,12 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		g.drawLine(p.x, p.y, newPos.x, newPos.y);
 		write(g,m,newPos,base);
 	}
+	private void writeEU(Graphics g, String m, Point p, int base) {
+		Point n=new Point(p.x+17*height/10,p.y-3*height/2);
+		g.drawLine(p.x, p.y, n.x, n.y);
+		write(g,m,n,base);
+	}
+
 	private void writeEI(Graphics g, String m, Point p, int base) {		
 		Point n=new Point(p.x+17*height/10,p.y-height);
 		g.drawLine(p.x, p.y, n.x, n.y);
