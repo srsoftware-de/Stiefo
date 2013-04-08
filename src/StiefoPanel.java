@@ -33,6 +33,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		case 'n': writeN(g,m,p,base); break;
 		case 'o': writeO(g,m,p,base); break;
 		case 'r': writeR(g,m,p,base); break;
+		case 'ß':
 		case 's': writeS(g,m,p,base); break;
 		case 't': writeT(g,m,p,base); break;
 		case 'u': writeU(g,m,p,base); break;
@@ -237,6 +238,14 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 	private void writeS(Graphics g, String m, Point p,int base) {
+		if (m.length()>0){
+			switch (m.charAt(0)){
+			case 's':
+				writeS(g,m.substring(1),p,base);
+				return;
+			}
+		}
+
 		g.drawArc(p.x-4*height/50, p.y-height/70, height/4, 10*height/40, 300, 175);
 		write(g,m,new Point(p.x+4*height/40,p.y+9*height/40),base);	
 	}
