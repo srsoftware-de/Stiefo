@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 public class StiefoPanel extends JPanel implements KeyListener{
 
 	private String message=null;
-	private static int height=40;
+	private static int height=30;
 	
 	private void write(Graphics g, String m, Point p,int base) {
 		System.out.println("write("+m+")");
@@ -102,7 +102,16 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 	private void writeR(Graphics g, String m, Point p, int base) {
-/*	this seems odd	
+		if (m.length()>0){
+			switch (m.charAt(0)){
+			case 'r':
+				writeR(g,m.substring(1),p,base);
+				return;
+			}
+		}
+
+		
+		/*	this seems odd	
  * if (p.y==base){
 			Point newPos = new Point(p.x+height/4, p.y-height/2);
 			g.drawLine(p.x, p.y, newPos.x, newPos.y);
@@ -232,6 +241,14 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 	private void writeM(Graphics g, String m, Point p,int base) {
+		if (m.length()>0){
+			switch (m.charAt(0)){
+			case 'm':
+				writeM(g,m.substring(1),p,base);
+				return;
+			}
+		}
+
 		g.drawArc(p.x-4*height/43, p.y-height/40, height/4, 43*height/40, 244, 225);
 		write(g,m,new Point(p.x-height/40,p.y+height),base);
 		
