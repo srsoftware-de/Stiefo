@@ -81,6 +81,11 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		g.drawLine(start.x-20, base, start.x+800, base);
 		g.drawLine(start.x-20, base-height/2, start.x+800, base-height/2);
 		g.drawLine(start.x-20, base-height, start.x+800, base-height);
+		int  i=10;		
+		while (i<800){
+			g.drawLine(i, base, i+height/4, base-height);
+			i+=height/4;
+		}
 		g.setColor(Color.black);
 		write(g,message,start,base);
 	}
@@ -93,8 +98,9 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 	private void writeD(Graphics g, String m, Point p, int base) {
-		g.drawArc(p.x, p.y-height/9, height/8, height/5, 190, 160);
-		Point n = new Point(p.x+height/8, p.y);		
+		g.drawLine(p.x,p.y,p.x+2*height/40,p.y+15*height/40);
+		g.drawArc(p.x+2*height/40, p.y+7*height/41, height/6, height/3, 190, 130);
+		Point n = new Point(p.x+8*height/40, p.y+18*height/40);		
 		write(g,m,n,base);
 	}
 
@@ -146,7 +152,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			}
 		}
 
-		Point n = new Point(p.x-height/10, p.y+height/2);
+		Point n = new Point(p.x-height/8, p.y+height/2);
 		g.drawLine(p.x, p.y, n.x, n.y);
 		write(g,m,n,base);
 	}
@@ -325,7 +331,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			}
 		}
 
-		Point n=new Point(p.x+17*height/10,p.y-height/2);
+		Point n=new Point(p.x+11*height/8,p.y-height/2);
 		g.drawLine(p.x, p.y, n.x, n.y);
 		write(g,m,n,base);
 	}
@@ -370,7 +376,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 
 
 	private void writeB(Graphics g, String m, Point p,int base) {
-		Point n = new Point(p.x-height/5, p.y+height);
+		Point n = new Point(p.x-height/4, p.y+height);
 		g.drawLine(p.x, p.y, n.x, n.y);
 		write(g,m,n,base);
 	}
@@ -405,7 +411,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			}
 		}
 
-		Point newPos = new Point(p.x+height, p.y-height);
+		Point newPos = new Point(p.x+3*height/4, p.y-height);
 		g.drawLine(p.x, p.y, newPos.x, newPos.y);
 		write(g,m,newPos,base);
 	}
@@ -472,7 +478,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		}
 		
 
-			Point newPos = new Point(p.x+height/2, p.y-height/2);
+			Point newPos = new Point(p.x+5*height/8, p.y-height/2);
 			g.drawLine(p.x, p.y, newPos.x, newPos.y);
 			write(g,m,newPos,base);
 	}
