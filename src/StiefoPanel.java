@@ -26,7 +26,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		case 'b': writeB(g,m,lastPoint,x,currentBase,lineBase); break;
 //		case 'c': writeC(g,m,position,lineBase); break;
 //		case 'd': writeD(g,m,lastPoint,x,currentBase,lineBase); break;
-		case 'e': write(g,m,lastPoint,x+height/2,currentBase,lineBase); break;
+		case 'e': write(g,m,lastPoint,x+height/4,currentBase,lineBase); break;
 //		case 'ä': writeÄ(g,m,position,lineBase); break;
 //		case 'g': writeG(g,m,position,lineBase); break;
 //		case 'h': writeH(g,m,position,lineBase); break;
@@ -40,7 +40,8 @@ public class StiefoPanel extends JPanel implements KeyListener{
 //		case 'ß':
 //		case 's': writeS(g,m,position,lineBase); break;
 //		case 't': writeT(g,m,position,lineBase); break;
-		case 'u': write(g,m,lastPoint,x+height,currentBase,lineBase); break;
+		case 't': writeT(g,m,lastPoint,x,currentBase,lineBase); break;
+		case 'u': write(g,m,lastPoint,x+3*height/4,currentBase,lineBase); break;
 //		case 'z': writeZ(g,m,position,lineBase); break;
 		default: write(g,m,lastPoint,x,currentBase,lineBase);
 						 break;
@@ -146,21 +147,21 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 
-	private void writeT(Graphics g, String m, Point p, int base) {
+	private void writeT(Graphics g, String m, Point lastPoint, int x, int currentBase,int base) {
 		if (m.length()>0){
 			switch (m.charAt(0)){
 			case 't':
-				writeT(g,m.substring(1),p,base);
+				writeT(g,m.substring(1),lastPoint,x,currentBase,base);
 				return;
 			case 'z':
-				writeZ(g,m.substring(1),p,base);
+//				writeZ(g,m.substring(1),p,base);
 				return;
 			}
 		}
 
-		Point n = new Point(p.x-height/8, p.y+height/2);
-		g.drawLine(p.x, p.y, n.x, n.y);
-		write(g,m,n,base);
+		if (lastPoint!=null) g.drawLine(lastPoint.x,lastPoint.y,x+height/8,currentBase-height/2);
+		g.drawLine(x+height/8,currentBase-height/2,x,currentBase);
+		write(g,m,new Point(x,currentBase),x+height/4,currentBase,base);
 	}
 
 
@@ -384,7 +385,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	private void writeB(Graphics g, String m, Point lastPoint, int x, int currentBase,int base) {		
 		g.drawLine(x+height/4, currentBase-height,x, currentBase);
 		if (lastPoint!=null) g.drawLine(lastPoint.x, lastPoint.y, x+height/4, currentBase-height);
-		write(g,m,new Point(x,currentBase),x,currentBase,base);
+		write(g,m,new Point(x,currentBase),x+height/4,currentBase,base);
 	}
 
 
