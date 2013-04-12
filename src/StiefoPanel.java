@@ -21,7 +21,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		m=m.substring(1);
 		switch (c){
 //		case ' ': writeSpace(g,m,position,lineBase); break;
-//		case 'a': writeA(g,m,position,lineBase); break;
+		case 'a': write(g,m,lastPoint,x+3*height/8,currentBase-height/2,lineBase); break;
 //		case 'ö': writeÖ(g,m,position,lineBase); break;
 		case 'b': writeB(g,m,lastPoint,x,currentBase,lineBase); break;
 //		case 'c': writeC(g,m,position,lineBase); break;
