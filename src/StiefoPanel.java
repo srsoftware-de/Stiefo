@@ -25,8 +25,8 @@ public class StiefoPanel extends JPanel implements KeyListener{
 //		case 'ö': writeÖ(g,m,position,lineBase); break;
 		case 'b': writeB(g,m,lastPoint,x,currentBase,lineBase); break;
 //		case 'c': writeC(g,m,position,lineBase); break;
-//		case 'd': writeD(g,m,position,lineBase); break;
-		case 'e': write(g,m,lastPoint,x+height/4,currentBase,lineBase);
+//		case 'd': writeD(g,m,lastPoint,x,currentBase,lineBase); break;
+		case 'e': write(g,m,lastPoint,x+height/2,currentBase,lineBase); break;
 //		case 'ä': writeÄ(g,m,position,lineBase); break;
 //		case 'g': writeG(g,m,position,lineBase); break;
 //		case 'h': writeH(g,m,position,lineBase); break;
@@ -40,7 +40,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 //		case 'ß':
 //		case 's': writeS(g,m,position,lineBase); break;
 //		case 't': writeT(g,m,position,lineBase); break;
-//		case 'u': writeU(g,m,position,lineBase); break;
+		case 'u': write(g,m,lastPoint,x+height,currentBase,lineBase); break;
 //		case 'z': writeZ(g,m,position,lineBase); break;
 		default: write(g,m,lastPoint,x,currentBase,lineBase);
 						 break;
