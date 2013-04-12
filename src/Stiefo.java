@@ -1,14 +1,9 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import edu.fsuj.csb.gui.VerticalPanel;
 
 public class Stiefo extends JFrame {
 
@@ -36,6 +31,6 @@ public class Stiefo extends JFrame {
 
 	public static void main(String[] args) {
 		Stiefo stiefo = new Stiefo("Stiefo von Srsoftware");
-		stiefo.show();
+		stiefo.setVisible(true);
 	}
 }
