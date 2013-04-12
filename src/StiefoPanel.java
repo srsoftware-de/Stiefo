@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.rmi.UnexpectedException;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -11,37 +12,37 @@ import javax.swing.JTextField;
 public class StiefoPanel extends JPanel implements KeyListener{
 
 	private String message=null;
-	private static int height=30;
+	private static int height=300;
 	
-	private void write(Graphics g, String m, Point p,int base) {
+	private void write(Graphics g, String m, Point lastPoint,int x, int currentBase,int lineBase) {
 		System.out.println("write("+m+")");
 		if (m.length()<1) return;
 		char c=m.charAt(0);
 		m=m.substring(1);
 		switch (c){
-		case ' ': writeSpace(g,m,p,base); break;
-		case 'a': writeA(g,m,p,base); break;
-		case 'ö': writeÖ(g,m,p,base); break;
-		case 'b': writeB(g,m,p,base); break;
-		case 'c': writeC(g,m,p,base); break;
-		case 'd': writeD(g,m,p,base); break;
-		case 'e': writeE(g,m,p,base); break;
-		case 'ä': writeÄ(g,m,p,base); break;
-		case 'g': writeG(g,m,p,base); break;
-		case 'h': writeH(g,m,p,base); break;
-		case 'i': writeI(g,m,p,base); break;
-		case 'ü': writeÜ(g,m,p,base); break;
-		case 'k': writeK(g,m,p,base); break;
-		case 'm': writeM(g,m,p,base); break;
-		case 'n': writeN(g,m,p,base); break;
-		case 'o': writeO(g,m,p,base); break;
-		case 'r': writeR(g,m,p,base); break;
-		case 'ß':
-		case 's': writeS(g,m,p,base); break;
-		case 't': writeT(g,m,p,base); break;
-		case 'u': writeU(g,m,p,base); break;
-		case 'z': writeZ(g,m,p,base); break;
-		default: write(g,m,p,base);
+//		case ' ': writeSpace(g,m,position,lineBase); break;
+//		case 'a': writeA(g,m,position,lineBase); break;
+//		case 'ö': writeÖ(g,m,position,lineBase); break;
+		case 'b': writeB(g,m,lastPoint,x,currentBase,lineBase); break;
+//		case 'c': writeC(g,m,position,lineBase); break;
+//		case 'd': writeD(g,m,position,lineBase); break;
+		case 'e': write(g,m,lastPoint,x+height/4,currentBase,lineBase);
+//		case 'ä': writeÄ(g,m,position,lineBase); break;
+//		case 'g': writeG(g,m,position,lineBase); break;
+//		case 'h': writeH(g,m,position,lineBase); break;
+//		case 'i': writeI(g,m,position,lineBase); break;
+//		case 'ü': writeÜ(g,m,position,lineBase); break;
+//		case 'k': writeK(g,m,position,lineBase); break;
+//		case 'm': writeM(g,m,position,lineBase); break;
+//		case 'n': writeN(g,m,position,lineBase); break;
+//		case 'o': writeO(g,m,position,lineBase); break;
+//		case 'r': writeR(g,m,position,lineBase); break;
+//		case 'ß':
+//		case 's': writeS(g,m,position,lineBase); break;
+//		case 't': writeT(g,m,position,lineBase); break;
+//		case 'u': writeU(g,m,position,lineBase); break;
+//		case 'z': writeZ(g,m,position,lineBase); break;
+		default: write(g,m,lastPoint,x,currentBase,lineBase);
 						 break;
 								
 		}
@@ -87,7 +88,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			i+=height/4;
 		}
 		g.setColor(Color.black);
-		write(g,message,start,base);
+		write(g,message,null,10,base,base);
 	}
 	
 	private void writeZ(Graphics g, String m, Point p, int base) {
@@ -132,6 +133,11 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		g.drawArc(p.x+11*height/80, p.y+16*height/40, height/8, height/8, 200, 115);
 		Point n=new Point(p.x+10*height/40,p.y+height/2);
 		write(g,m,n,base);			
+	}
+
+	private void write(Graphics g, String m, Point n, int base) {
+		throw new NullPointerException("Use of old dummy method");
+		
 	}
 
 	public void setMessage(String m){
@@ -375,10 +381,10 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 
-	private void writeB(Graphics g, String m, Point p,int base) {
-		Point n = new Point(p.x-height/4, p.y+height);
-		g.drawLine(p.x, p.y, n.x, n.y);
-		write(g,m,n,base);
+	private void writeB(Graphics g, String m, Point lastPoint, int x, int currentBase,int base) {		
+		g.drawLine(x+height/4, currentBase-height,x, currentBase);
+		if (lastPoint!=null) g.drawLine(lastPoint.x, lastPoint.y, x+height/4, currentBase-height);
+		write(g,m,new Point(x,currentBase),x,currentBase,base);
 	}
 
 
