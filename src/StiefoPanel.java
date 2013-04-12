@@ -35,12 +35,12 @@ public class StiefoPanel extends JPanel implements KeyListener{
 //		case 'ä': writeÄ(g,m,position,lineBase); break;
 //		case 'g': writeG(g,m,position,lineBase); break;
 //		case 'h': writeH(g,m,position,lineBase); break;
-//		case 'i': writeI(g,m,position,lineBase); break;
+		case 'i': write(g,m,lastPoint,x+height/8,currentBase+height/2,lineBase); break;
 //		case 'ü': writeÜ(g,m,position,lineBase); break;
 //		case 'k': writeK(g,m,position,lineBase); break;
 //		case 'm': writeM(g,m,position,lineBase); break;
 		case 'n': writeN(g,m,lastPoint,x,currentBase,lineBase); break;
-//		case 'o': writeO(g,m,position,lineBase); break;
+		case 'o': write(g,m,lastPoint,x+5*height/8,currentBase+height/2,lineBase); break;
 		case 'r': writeR(g,m,lastPoint,x,currentBase,lineBase); break;
 //		case 'ß':
 //		case 's': writeS(g,m,position,lineBase); break;
@@ -82,7 +82,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		super.paint(g);
 		if (message==null || message.length()<1) return;
 		System.out.println(message);
-		int base=200+height;
+		int base=20+height;
 		Point start=new Point(10,base);
 		g.setColor(Color.lightGray);
 		g.drawLine(start.x-20, base, start.x+800, base);
