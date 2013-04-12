@@ -41,7 +41,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 //		case 'm': writeM(g,m,position,lineBase); break;
 		case 'n': writeN(g,m,lastPoint,x,currentBase,lineBase); break;
 //		case 'o': writeO(g,m,position,lineBase); break;
-//		case 'r': writeR(g,m,position,lineBase); break;
+		case 'r': writeR(g,m,lastPoint,x,currentBase,lineBase); break;
 //		case 'ß':
 //		case 's': writeS(g,m,position,lineBase); break;
 //		case 't': writeT(g,m,position,lineBase); break;
@@ -118,27 +118,26 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		write(g,m,n,base);
 	}
 
-	private void writeR(Graphics g, String m, Point p, int base) {
-		if (m.length()>0){
-			switch (m.charAt(0)){
-			case 'r':
-				writeR(g,m.substring(1),p,base);
-				return;
-			}
-		}
+	private void writeR(Graphics g, String m, Point lastPoint,int x, int currentBase, int base) {
+//		if (m.length()>0){
+//			switch (m.charAt(0)){
+//			case 'r':
+//				writeR(g,m.substring(1),p,base);
+//				return;
+//			}
+//		}
 
 		
-		/*	this seems odd	
- * if (p.y==base){
-			Point newPos = new Point(p.x+height/4, p.y-height/2);
-			g.drawLine(p.x, p.y, newPos.x, newPos.y);
-			p=newPos;
-		}*/
-		g.drawArc(p.x-height/80, p.y-height/40, height/8, height/8, 20, 115);
-		g.drawLine(p.x+9*height/80, p.y+height/40, p.x+11*height/80, p.y+19*height/40);
-		g.drawArc(p.x+11*height/80, p.y+16*height/40, height/8, height/8, 200, 115);
-		Point n=new Point(p.x+10*height/40,p.y+height/2);
-		write(g,m,n,base);			
+		if (lastPoint!=null) g.drawLine(lastPoint.x,lastPoint.y,x-5*height/88,currentBase-5*height/11);
+		g.drawArc(x-height/8,currentBase-height/2,height/4,height,30,85);
+		g.drawArc(x+11*height/120,currentBase-height,height/4,height,210,85);
+		write(g,m,new Point(x+15*height/56,currentBase-height/18),x+height/2,currentBase,base);
+		
+//		g.drawArc(p.x-height/80, p.y-height/40, height/8, height/8, 20, 115);
+//		g.drawLine(p.x+9*height/80, p.y+height/40, p.x+11*height/80, p.y+19*height/40);
+//		g.drawArc(p.x+11*height/80, p.y+16*height/40, height/8, height/8, 200, 115);
+//		Point n=new Point(p.x+10*height/40,p.y+height/2);
+//		write(g,m,n,base);			
 	}
 
 	private void write(Graphics g, String m, Point n, int base) {
