@@ -16,6 +16,11 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	
 	private void write(Graphics g, String m, Point lastPoint,int x, int currentBase,int lineBase) {
 		System.out.println("write("+m+")");
+		
+		if (lastPoint!=null){
+			g.drawLine(lastPoint.x-10,lastPoint.y-10,lastPoint.x+10,lastPoint.y+10);
+			g.drawLine(lastPoint.x-10,lastPoint.y+10,lastPoint.x+10,lastPoint.y-10);
+		}
 		if (m.length()<1) return;
 		char c=m.charAt(0);
 		m=m.substring(1);
@@ -34,7 +39,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 //		case 'ü': writeÜ(g,m,position,lineBase); break;
 //		case 'k': writeK(g,m,position,lineBase); break;
 //		case 'm': writeM(g,m,position,lineBase); break;
-//		case 'n': writeN(g,m,position,lineBase); break;
+		case 'n': writeN(g,m,lastPoint,x,currentBase,lineBase); break;
 //		case 'o': writeO(g,m,position,lineBase); break;
 //		case 'r': writeR(g,m,position,lineBase); break;
 //		case 'ß':
@@ -248,27 +253,27 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		write(g,m,n,base);
 	}
 
-	private void writeN(Graphics g, String m, Point p,int base) {
-		if (m.length()>0){
-			switch (m.charAt(0)){
-			case 'd':
-			case 't':
-				g.drawArc(p.x-3*height/40, p.y-height/40, height/5, 41*height/40, 310, 160);
-				g.drawLine(p.x+4*height/43,p.y+35*height/40,p.x+3*height/43,p.y+height);
-				write(g,m.substring(1),new Point(p.x+3*height/43,p.y+height),base);
-				return;
-			case 'g':
-			case 'k':
-				g.drawArc(p.x-height/40, p.y-2*height/40, height/4, height/4, 20, 115);
-				g.drawLine(p.x+9*height/40, p.y+2*height/40, p.x+11*height/40, p.y+height);
-				Point n=new Point(p.x+10*height/40,p.y+height);
-				write(g,m.substring(1),n,base);
-				return;
-			case 'n':
-				writeN(g,m.substring(1),p,base);
-				return;
-			}
-		}
+	private void writeN(Graphics g, String m, Point lastPoint,int x, int currentBase,int base) {
+//		if (m.length()>0){
+//			switch (m.charAt(0)){
+//			case 'd':
+//			case 't':
+//				g.drawArc(p.x-3*height/40, p.y-height/40, height/5, 41*height/40, 310, 160);
+//				g.drawLine(p.x+4*height/43,p.y+35*height/40,p.x+3*height/43,p.y+height);
+//				write(g,m.substring(1),new Point(p.x+3*height/43,p.y+height),base);
+//				return;
+//			case 'g':
+//			case 'k':
+//				g.drawArc(p.x-height/40, p.y-2*height/40, height/4, height/4, 20, 115);
+//				g.drawLine(p.x+9*height/40, p.y+2*height/40, p.x+11*height/40, p.y+height);
+//				Point n=new Point(p.x+10*height/40,p.y+height);
+//				write(g,m.substring(1),n,base);
+//				return;
+//			case 'n':
+//				writeN(g,m.substring(1),p,base);
+//				return;
+//			}
+//		}
 		/* this seems odd
 		 * if (p.y==base){
 			Point newPos = new Point(p.x+height/4, p.y-height/2);
@@ -276,8 +281,9 @@ public class StiefoPanel extends JPanel implements KeyListener{
 			p=newPos;
 		} */
 
-		g.drawArc(p.x-4*height/40, p.y, height/4, 23*height/40, 310, 155);
-		write(g,m,new Point(p.x+2*height/20,p.y+height/2),base);
+		if (lastPoint!=null) g.drawLine(lastPoint.x,lastPoint.y,x-height/9,currentBase-5*height/11);
+		g.drawArc(x-height/4,currentBase-height/2,height/2,height,0,115);
+		write(g,m,new Point(x+height/4,currentBase),x+height/2,currentBase,base);
 		
 	}
 
