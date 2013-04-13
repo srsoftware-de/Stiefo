@@ -26,29 +26,28 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		m=m.substring(1);
 		switch (c){
 //		case ' ': writeSpace(g,m,position,lineBase); break;
-		case 'a': write(g,m,lastPoint,x+3*height/8,currentBase-height/2,lineBase); break;
+		case 'a':  write(g,m,lastPoint,x+3*height/8,currentBase-height/2,lineBase); break;
 //		case 'ö': writeÖ(g,m,position,lineBase); break;
-		case 'b': writeB(g,m,lastPoint,x,currentBase,lineBase); break;
+		case 'b': writeB(g,m,lastPoint,x,						currentBase,lineBase); break;
 //		case 'c': writeC(g,m,position,lineBase); break;
-//		case 'd': writeD(g,m,lastPoint,x,currentBase,lineBase); break;
-		case 'e': write(g,m,lastPoint,x+height/4,currentBase,lineBase); break;
+		case 'd': writeD(g,m,lastPoint,x,						currentBase,lineBase); break;
+		case 'e':  write(g,m,lastPoint,x+height/4,	currentBase,lineBase); break;
 //		case 'ä': writeÄ(g,m,position,lineBase); break;
 //		case 'g': writeG(g,m,position,lineBase); break;
 //		case 'h': writeH(g,m,position,lineBase); break;
-		case 'i': write(g,m,lastPoint,x+height/8,currentBase+height/2,lineBase); break;
+		case 'i': write(g,m,lastPoint,x+height/8,		currentBase+height/2,lineBase); break;
 //		case 'ü': writeÜ(g,m,position,lineBase); break;
 //		case 'k': writeK(g,m,position,lineBase); break;
 //		case 'm': writeM(g,m,position,lineBase); break;
-		case 'n': writeN(g,m,lastPoint,x,currentBase,lineBase); break;
-		case 'o': write(g,m,lastPoint,x+5*height/8,currentBase+height/2,lineBase); break;
-		case 'r': writeR(g,m,lastPoint,x,currentBase,lineBase); break;
+		case 'n': writeN(g,m,lastPoint,x,						currentBase,lineBase); break;
+		case 'o':  write(g,m,lastPoint,x+5*height/8,currentBase+height/2,lineBase); break;
+		case 'r': writeR(g,m,lastPoint,x,						currentBase,lineBase); break;
 //		case 'ß':
 //		case 's': writeS(g,m,position,lineBase); break;
-//		case 't': writeT(g,m,position,lineBase); break;
-		case 't': writeT(g,m,lastPoint,x,currentBase,lineBase); break;
-		case 'u': write(g,m,lastPoint,x+3*height/4,currentBase,lineBase); break;
+		case 't': writeT(g,m,lastPoint,x,						currentBase,lineBase); break;
+		case 'u':  write(g,m,lastPoint,x+3*height/4,currentBase,lineBase); break;
 //		case 'z': writeZ(g,m,position,lineBase); break;
-		default: write(g,m,lastPoint,x,currentBase,lineBase);
+		default: 	 write(g,m,lastPoint,x,						currentBase,lineBase);
 						 break;
 								
 		}
@@ -104,11 +103,10 @@ public class StiefoPanel extends JPanel implements KeyListener{
 		write(g,m,n,base);
 	}
 
-	private void writeD(Graphics g, String m, Point p, int base) {
-		g.drawLine(p.x,p.y,p.x+2*height/40,p.y+15*height/40);
-		g.drawArc(p.x+2*height/40, p.y+7*height/41, height/6, height/3, 190, 130);
-		Point n = new Point(p.x+8*height/40, p.y+18*height/40);		
-		write(g,m,n,base);
+	private void writeD(Graphics g, String m, Point lastPosition, int x, int currentBase,int base) {
+		if (lastPosition!=null) g.drawLine(lastPosition.x,lastPosition.y,x-2*height/13,currentBase-height/2);
+		g.drawArc(x-height/6,currentBase-3*height/2,height/3,3*height/2,200,90);
+		write(g,m,new Point(x+height/17,currentBase-height/20),x+height/4,currentBase,base);
 	}
 
 	private void writeH(Graphics g, String m, Point p, int base) {
@@ -165,7 +163,7 @@ public class StiefoPanel extends JPanel implements KeyListener{
 
 		if (lastPoint!=null) g.drawLine(lastPoint.x,lastPoint.y,x+height/8,currentBase-height/2);
 		g.drawLine(x+height/8,currentBase-height/2,x,currentBase);
-		write(g,m,new Point(x,currentBase),x+height/4,currentBase,base);
+		write(g,m,new Point(x,currentBase),x+height/2,currentBase,base);
 	}
 
 
