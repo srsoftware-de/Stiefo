@@ -231,8 +231,8 @@ public class StiefoPanel extends JPanel implements KeyListener{
 	}
 
 	private void writeN(Graphics g, String m, Point lastPoint,int x, int currentBase,int base) {
-//		if (m.length()>0){
-//			switch (m.charAt(0)){
+		if (m.length()>0){
+			switch (m.charAt(0)){
 //			case 'd':
 //			case 't':
 //				g.drawArc(p.x-3*height/40, p.y-height/40, height/5, 41*height/40, 310, 160);
@@ -246,11 +246,11 @@ public class StiefoPanel extends JPanel implements KeyListener{
 //				Point n=new Point(p.x+10*height/40,p.y+height);
 //				write(g,m.substring(1),n,base);
 //				return;
-//			case 'n':
-//				writeN(g,m.substring(1),p,base);
-//				return;
-//			}
-//		}
+			case 'n':
+				writeN(g,m.substring(1),lastPoint,x,currentBase,base);
+				return;
+			}
+		}
 		/* this seems odd
 		 * if (p.y==base){
 			Point newPos = new Point(p.x+height/4, p.y-height/2);
